@@ -1597,7 +1597,7 @@ MonoBehaviour:
   itemText: {fileID: 1759923793}
   moveSpeed: 15
   defaultMoveSpeed: 15
-  itemMoveSpeed: 40
+  itemMoveSpeed: 30
   AxesName: VerticalRacketRight
   isScoreIncreased: 0
   myItemType: 0
