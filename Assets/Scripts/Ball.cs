@@ -8,10 +8,13 @@ public class Ball : MonoBehaviour
     public Rigidbody2D ballRb;
     public float moveSpeed;
 
+    [Header("Item")]
+    [SerializeField] private ItemType myItemType;
+
     void Start()
     {
 
-        ballRb.velocity = new Vector2(1, 1) * moveSpeed;
+        ballRb.linearVelocity = new Vector2(1, 1) * moveSpeed;
 
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -38,10 +41,20 @@ public class Ball : MonoBehaviour
         }
         if (tag.Equals(Tag.leftRacket))
         {
+            if (myItemType != ItemType.Length)
+            {
+                LeftRacket.ApplyItemEffectToRacket(myItemType);
+                RemoveItem();
+            }
             wayBall(collision, 1);
         }
         if (tag.Equals(Tag.rightRacket))
         {
+            if (myItemType != ItemType.Length)
+            {
+                RightRacket.ApplyItemEffectToRacket(myItemType);
+                RemoveItem();
+            }
             wayBall(collision, -1);
         }
     }
@@ -51,6 +64,36 @@ public class Ball : MonoBehaviour
         float a = transform.position.y - collision.gameObject.transform.position.y;
         float b = collision.collider.bounds.size.y;
         float y = a / b;
-        ballRb.velocity = new Vector2(x, y)*moveSpeed;
+        ballRb.linearVelocity = new Vector2(x, y)*moveSpeed;
+    }
+    public void TakeItem(ItemType type)
+    {
+        myItemType = type;
+        ChangeBallColor();
+    }
+    public void RemoveItem()
+    {
+        myItemType = ItemType.Length;
+        ChangeBallColor();
+    }
+    private void ChangeBallColor()
+    {
+        SpriteRenderer sprite = this.gameObject.GetComponent<SpriteRenderer>();
+
+        switch (myItemType)
+        {
+            case ItemType.SpeedItem:
+                sprite.color = Color.red;
+                break;
+            case ItemType.ScoreItem:
+                sprite.color = Color.green;
+                break;
+            case ItemType.SizeItem:
+                sprite.color = Color.yellow;
+                break;
+            default:
+                sprite.color = Color.white;
+                break;
+        }
     }
 }

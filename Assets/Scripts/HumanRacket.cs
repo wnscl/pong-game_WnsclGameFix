@@ -9,6 +9,6 @@ public class HumanRacket : Racket
     protected override void Movement()
     {
         float moveAxesValue = Input.GetAxis(AxesName) * moveSpeed;
-        rb.velocity = new Vector2(0, moveAxesValue);
+        rb.linearVelocity = new Vector2(0, moveAxesValue);
     }
 }

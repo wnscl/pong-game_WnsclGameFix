@@ -12,12 +12,12 @@ public class RacketAI : Racket
         {
             if (ball.position.y > transform.position.y)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1) * moveSpeed;
+                GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0, 1) * moveSpeed;
             }
 
             if (ball.position.y < transform.position.y)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, -1) * moveSpeed;
+                GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0, -1) * moveSpeed;
             }
         }
 
