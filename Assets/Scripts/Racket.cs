@@ -49,14 +49,17 @@ public abstract class Racket : MonoBehaviour
         switch (itemType)
         {
             case ItemType.SpeedItem:
+                CancelInvoke(nameof(SpeedDown));
                 SpeedUp();
                 Invoke("SpeedDown", 5.0f);
                 break;
             case ItemType.ScoreItem:
+                CancelInvoke(nameof(ScoreDown));
                 ScoreUp();
                 Invoke("ScoreDown", 5.0f);
                 break;
             case ItemType.SizeItem:
+                CancelInvoke(nameof(SizeDown));
                 SizeUp();
                 Invoke("SizeDown", 5.0f);
                 break;
